@@ -212,7 +212,20 @@ Untuk mengecek apakah aplikasi sederhana kasir self-service sesuia requirements 
 Pembeli ingin menambahkan 2 item baru menggunakan metode `add_item()`. Item yang ingin ditambahkan adalah
 * Nama Item : Ayam Goreng, Qty 2, Harga 20000
 * Nama Item : Pasta Gigi, Qty 3, Harga 15000
+Perintah yang harus dimasukkan dan outputnya akan seperti berikut
+![image](https://user-images.githubusercontent.com/114964220/205926999-41505eb2-f91f-49f4-9700-3bcd0f10963a.png)
 
+2. Test Case 2
+Pembeli ingin menghapus item Pasta Gigi yang sudah diinput sebelumnya. 
+Perintah yang harus dimasukkan dan outputnya akan seperti berikut
+![image](https://user-images.githubusercontent.com/114964220/205927203-6b9824c9-b986-43fa-b961-b4de63403855.png)
 
+3. Test Case 3
+Pembeli ingin menghapus semua item karena kesalahan input dengan reset transaksi.
+Perintah yang harus dimasukkan dan outputnya akan seperti berikut
+![image](https://user-images.githubusercontent.com/114964220/205927333-7d84b73d-45b2-49b1-a414-c54f2d02f9e8.png)
 
- 
+4. Test Case 4
+Setelah pembeli selesai berbelanja, akan menghitung total yang harus dibayarkan menggunakan method `total_price()`.
+Perintah yang harus dimasukkan dan outputnya akan seperti berikut
+![image](https://user-images.githubusercontent.com/114964220/205927479-30fc4ee5-ae17-4781-98f6-4e004ffd4c9e.png)
