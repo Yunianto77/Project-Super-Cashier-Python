@@ -18,7 +18,7 @@ Membuat sistem self-service kasir sederhana dengan Object Oriented Programming b
 7. Menghitung total belanja dan total yang harus dibayar setelah dipotong diskon jika ada.
 
 ## Flowchart
-![cek](https://user-images.githubusercontent.com/114964220/205862198-bded70c4-2d06-4983-911d-f9fa942de0e3.jpg)
+![FLOW 2](https://user-images.githubusercontent.com/114964220/206019955-254dfdfc-806e-4e5a-95c0-18fe1f6cd230.jpg)
 
 ## Penjelasan Code
 Keseluruhan Code ditulis dalam bahasa python, dalam project kali ini menggunakan class `Transaction` dan data-data dalam transaksi pembelian disimpan dengan bentuk `dictionary` dengan nama `shoppingcart`. Beberapa potongan code function atau method yang ada di class `Transaction` sesuai requirement antara lain
