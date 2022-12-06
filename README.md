@@ -97,7 +97,108 @@ def update_quantity(self, item, quantity_baru):
         except ValueError:
             print('Item yang anda masukkan harus dalam bentuk angka.')
  ```
- Di method ini pembeli memasukkan item yang akan diganti jumlahnya dan memasukkan jumlah baru. Terdapat `try` dan `except` untuk membantuk validasi item yang dimasukkan ada di dalam dictionary. Jika sudah sesuai, jumlah yang baru akan diupdate ke dictionary `shoppingcart` sesuai nama itemnya.
+ Di method ini pembeli memasukkan item yang akan diganti jumlahnya dan memasukkan jumlah baru. Terdapat `try` dan `except` untuk membantu validasi item yang diinput ada di dalam dictionary atau tidak. Jika sudah sesuai, jumlah yang baru akan diupdate ke dictionary `shoppingcart` sesuai nama itemnya dan menampilkan tabel pembelian yang terupdate.
  
- ###Method update_price
+ ### Method update_price
+ Method ini berfungsi untuk mengubah harga barang yang sebelumnya sudah diinput oleh pembeli di awal. 
+ ```
+ def update_price(self, item, price_baru):
+        '''fungsi untuk mengubah harga item pembelian
+        parameternya
+        price (int)      : harga item yang akan diganti
+        price_baru (int) : harga item baru'''
+        
+        try:
+            self.shoppingcart[item][1] = price_baru
+            self.shoppingcart[item][2] = price_baru*self.shoppingcart[item][0]
+            
+            print('Berikut adalah daftar belanja anda :')
+            self.check_transaksi()
+            print("")
+            print(f'Berhasil mengubah Harga Item {item} menjadi Rp {price_baru}.')
+            
+        except KeyError:
+            print('Item  masukkan tidak ada dalam daftar pembelian.') 
+```
+Di method ini pembeli memasukkan item yang akan diganti harganya dan memasukkan harga baru. Terdapat `try` dan `except` untuk membantu validasi item yang diinput ada di dalam dictionary atau tidak. Jika sudah sesuai, jumlah yang baru akan diupdate ke dictionary `shoppingcart` sesuai nama itemnya dan menampilkan tabel pembelian yang terupdate.
+
+### Method delete_item
+Saat pembeli ingin menghapus pembelian barang yang sudah diinput sebelumnya, digunakan method `delete_item`.
+```
+def delete_item(self, item):
+        '''fungsi untuk menghapus data pembelian yang sudah terinput sebelumnya,
+        yang dihapus meliputi nama item, quantity dan harga item tersebut.
+        parameternya
+        item (str): nama item yang akan dihapus'''
+        try:
+            self.shoppingcart.pop(item)
+        
+            print('Berikut adalah daftar belanja anda :')
+            self.check_transaksi()
+            print("")
+            print(f'Berhasil menghapus item {item} dari daftar pembelian.')
+            
+        except KeyError:
+            print('Item  masukkan tidak ada dalam daftar pembelian.')
+```
+Di method ini pembeli memasukkan item yang akan dihapus. Terdapat `try` dan `except` untuk membantu validasi item yang diinput ada di dalam dictionary atau tidak. Jika sudah sesuai, item barang, jumlah serta harga yang sebelumnya sudah terinput di dictionary `shoppingcart` akan dihapus, selanjutnya akan ditampilkan tabel pembelian yang terupdate.
+
+### Method reset_transaksi
+Saat pembeli ingin menghapus semua transaksi yang sudah diinput sebelumnya, digunakan method `reset_transaksi`.
+```
+def reset_transaksi(self):
+        '''fungsinya untuk menghapus semua data pembelian'''
+        
+        self.shoppingcart.clear()
+        print('Semua pembelian berhasil dihapus')
+```
+Di method ini, seluruh pembelian yang tersimpan di dictionary `shoppingcart` akan terhapus semua.
+
+### Method check_transaksi
+Untuk mengecek apakah transaksi yang dilakukan sudah sesuai atau belum, pembeli akan menggunakan method `check_transaksi`. Method ini juga digunakan di dalam method lain untuk menampilkan tabel terupdate setelah ada update jumlah atau harga atau ketika ada item yang dihapus.
+```
+def check_transaksi(self):
+        '''fungsinya mengecek keseluruhan pembelian yang tersimpan di dictionary transaksi.'''
+        
+        if self.shoppingcart == dict():
+            print('Belum ada pembelian.')
+        
+        else:
+            table_transaksi = pd.DataFrame(self.shoppingcart).T
+            headers = ['Nama Barang', 'Jumlah', 'Harga per pcs', 'Total Harga']
+            print(tabulate(table_transaksi, headers, tablefmt="github"))
+    
+```
+
+### Method total_transaksi
+Setelah semua transaksi sesuai dengan keinginan pembeli, method `total_transaksi` digunakan untuk menghitung total harga pembelian serta diskon dan harga setelah dipotong diskon jika ada.
+```
+def total_transaksi(self):
+        '''fungsinya untuk menampilkan harga setelah terpotong diskon sesuai total pembelian'''
+        
+        total_price = 0
+        for item in self.shoppingcart:
+            total_price += self.shoppingcart[item][2]
+            
+        if total_price < 300_000 and total_price >= 200_000:
+            discount =int(0.05 * total_price)
+            total_price_discounted =int(total_price - discount)
+            
+        elif total_price < 500_000 and total_price >= 300_000:
+            discount =int(0.08 * total_price)
+            total_price_discounted =int(total_price - discount)
+            
+        elif total_price > 300_000:
+            discount =int(0.1 * total_price)
+            total_price_discounted =int(total_price - discount)
+        else:
+            total_price_discounted = total_price
+            
+        print('Berikut adalah daftar belanja anda :')    
+        self.check_transaksi()
+        print("")
+        print(f'Total harga yang harus anda bayar setelah dipotong diskon (jika ada) sebesar Rp {total_price_discounted}')
+```
+
+
  
