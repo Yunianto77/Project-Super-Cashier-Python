@@ -180,15 +180,15 @@ def total_transaksi(self):
         for item in self.shoppingcart:
             total_price += self.shoppingcart[item][2]
             
-        if total_price < 300_000 and total_price >= 200_000:
+        if total_price <= 300_000 and total_price > 200_000:
             discount =int(0.05 * total_price)
             total_price_discounted =int(total_price - discount)
             
-        elif total_price < 500_000 and total_price >= 300_000:
+        elif total_price <= 500_000 and total_price > 300_000:
             discount =int(0.08 * total_price)
             total_price_discounted =int(total_price - discount)
             
-        elif total_price > 300_000:
+        elif total_price > 500_000:
             discount =int(0.1 * total_price)
             total_price_discounted =int(total_price - discount)
         else:
@@ -197,8 +197,22 @@ def total_transaksi(self):
         print('Berikut adalah daftar belanja anda :')    
         self.check_transaksi()
         print("")
-        print(f'Total harga yang harus anda bayar setelah dipotong diskon (jika ada) sebesar Rp {total_price_discounted}')
+        print(f'Total harga yang harus anda bayar setelah dipotong diskon (jika ada) sebesar Rp {total_price_discounted}'
 ```
+Ketentuan diskon yang didapat pembeli yaitu
+* Pembelian kurang dari Rp 200000 tidak mendapat diskon,
+* Pembelian di atas Rp 200000 mendapat diskon 5%,
+* Pembelian di atas Rp 300000 mendapat diskon 8%,
+* Pembelian di atas Rp 500000 mendapat diskon 10%.
+
+## Test Case
+Untuk mengecek apakah aplikasi sederhana kasir self-service sesuia requirements atau belum maka akan dicoba menggunakan beberapa test case sebagai berikut
+
+1. Test Case 1
+Pembeli ingin menambahkan 2 item baru menggunakan metode `add_item()`. Item yang ingin ditambahkan adalah
+* Nama Item : Ayam Goreng, Qty 2, Harga 20000
+* Nama Item : Pasta Gigi, Qty 3, Harga 15000
+
 
 
  
